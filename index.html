@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f6f2e9" />
+    <meta name="description" content="Find your next beautiful photo window with real golden-hour times and local weather forecasts." />
+    <title>Chasing Light — Find your golden hour</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <div class="site-shell">
+      <header class="site-header">
+        <a class="brand" href="#top" aria-label="Chasing Light home">
+          <span class="brand-symbol" aria-hidden="true"><span></span></span>
+          <span>chasing light<span class="brand-period">.</span></span>
+        </a>
+        <nav aria-label="Main navigation" class="top-nav">
+          <a href="#forecast">The forecast</a>
+          <a href="#saved">Saved moments</a>
+          <a href="#about">About</a>
+        </nav>
+        <span class="header-caption">GOOD LIGHT IS WORTH THE WAIT</span>
+      </header>
+
+      <main id="top">
+        <section class="intro-section" aria-labelledby="main-title">
+          <div class="intro-copy">
+            <div class="eyebrow"><span class="eyebrow-dot"></span> YOUR PERSONAL LIGHT FORECAST</div>
+            <h1 id="main-title">The world looks<br />different <em>in this light.</em></h1>
+            <p>Find those fleeting minutes when the sky does something beautiful. We pair golden-hour timing with real weather forecasts so you know when to take your camera outside.</p>
+
+            <form class="search-form" id="city-form" aria-label="Search for a city">
+              <label for="city-input" class="sr-only">Search city</label>
+              <span class="search-icon" aria-hidden="true">⌕</span>
+              <input id="city-input" name="city" type="search" placeholder="Try St. Louis, Tokyo, Paris…" autocomplete="off" minlength="2" required />
+              <button type="submit" id="search-button" class="search-button">Explore <span aria-hidden="true">↗</span></button>
+            </form>
+            <button id="locate-button" class="location-button" type="button"><span aria-hidden="true">◎</span> Use my current location</button>
+            <p id="status-message" class="status-message" role="status" aria-live="polite"></p>
+          </div>
+
+          <div class="scene-card" id="scene-card" data-phase="evening" role="img" aria-label="Illustrated warm horizon landscape during golden hour">
+            <div class="scene-grain" aria-hidden="true"></div>
+            <div class="scene-topline"><span>THE ART OF SHOWING UP</span><span>EST. AT FIRST LIGHT ↗</span></div>
+            <div class="scene-sun" aria-hidden="true"></div>
+            <div class="scene-hill scene-hill-back" aria-hidden="true"></div>
+            <div class="scene-hill scene-hill-front" aria-hidden="true"></div>
+            <div class="scene-bottom">
+              <span class="scene-caption">A LITTLE LIGHT CHANGES EVERYTHING</span>
+              <span class="scene-coordinate" id="scene-coordinate">38.63° N / 90.20° W</span>
+            </div>
+            <div class="scene-badge" aria-hidden="true">☀<br /><span>01 / ∞</span></div>
+          </div>
+        </section>
+
+        <section id="forecast" class="forecast-section" aria-labelledby="forecast-title">
+          <div class="section-heading">
+            <div>
+              <div class="eyebrow">01 — THE OUTLOOK</div>
+              <h2 id="forecast-title">Your next <em>good light.</em></h2>
+              <p class="section-subtitle" id="location-title">Exploring St. Louis, Missouri</p>
+            </div>
+            <div class="forecast-updated" id="forecast-updated">FORECAST / COMING INTO FOCUS</div>
+          </div>
+
+          <div id="loading-state" class="loading-panel" role="status" aria-live="polite">
+            <div class="loading-sun" aria-hidden="true"></div>
+            <p>Looking for a little light…</p>
+            <span>Bringing weather and solar data together.</span>
+          </div>
+
+          <div id="forecast-content" hidden>
+            <article class="feature-card" aria-labelledby="feature-title">
+              <div class="feature-header">
+                <span class="pill"><span class="pill-sparkle" aria-hidden="true">✦</span> EDITOR'S PICK</span>
+                <span class="feature-date" id="feature-date"></span>
+              </div>
+              <div class="feature-main">
+                <div class="feature-story">
+                  <div class="feature-kicker" id="feature-kicker">EVENING LIGHT</div>
+                  <h3 id="feature-title">Worth stepping outside for.</h3>
+                  <p id="feature-summary"></p>
+                  <div class="feature-time"><span aria-hidden="true">◷</span> <span id="feature-time"></span></div>
+                  <div class="feature-actions">
+                    <button class="dark-button" id="feature-save" type="button">☆ Save this moment</button>
+                    <button class="outline-button" id="feature-share" type="button">↗ Share forecast</button>
+                  </div>
+                </div>
+                <div class="feature-score-wrap">
+                  <div class="score-ring" id="score-ring" aria-label="Photo potential score">
+                    <span class="score-number" id="feature-score">--</span><span class="score-out-of">/100</span>
+                  </div>
+                  <span class="score-label">PHOTO POTENTIAL</span>
+                  <span class="score-note">An informed hunch, not a guarantee</span>
+                </div>
+              </div>
+              <div class="feature-stats" aria-label="Forecast details">
+                <div class="stat"><span class="stat-label">CLOUD COVER</span><strong id="stat-cloud">--</strong><small id="stat-cloud-note"></small></div>
+                <div class="stat"><span class="stat-label">RAIN CHANCE</span><strong id="stat-rain">--</strong><small>Lower is better</small></div>
+                <div class="stat"><span class="stat-label">TEMPERATURE</span><strong id="stat-temp">--</strong><small>At golden hour</small></div>
+                <div class="stat"><span class="stat-label">WIND</span><strong id="stat-wind">--</strong><small>Estimated speed</small></div>
+              </div>
+            </article>
+
+            <div class="windows-heading">
+              <div><div class="eyebrow">02 — THE POSSIBILITIES</div><h2>Coming up <em>in the sky.</em></h2><p>Compare morning and evening light over the next five days.</p></div>
+              <div class="filter-buttons" role="group" aria-label="Filter photo windows">
+                <button type="button" class="filter active" data-filter="all" aria-pressed="true">All</button>
+                <button type="button" class="filter" data-filter="morning" aria-pressed="false">Mornings</button>
+                <button type="button" class="filter" data-filter="evening" aria-pressed="false">Evenings</button>
+              </div>
+            </div>
+            <div id="windows-grid" class="windows-grid"></div>
+          </div>
+
+          <div id="error-panel" class="error-panel" hidden role="alert">
+            <span class="error-icon" aria-hidden="true">☁</span>
+            <h3>The sky's a little unclear right now.</h3>
+            <p id="error-description">We couldn't load the forecast. Check your connection and try again.</p>
+            <button type="button" class="dark-button" id="retry-button">Try again ↗</button>
+          </div>
+        </section>
+
+        <section id="saved" class="saved-section" aria-labelledby="saved-title">
+          <div class="saved-intro"><div class="eyebrow">03 — YOUR COLLECTION</div><h2 id="saved-title">Moments <em>to remember.</em></h2><p>Save a promising window for later. Your picks stay in this browser, even when you leave.</p></div>
+          <div id="saved-list" class="saved-list" aria-live="polite"></div>
+        </section>
+
+        <section id="about" class="about-section" aria-labelledby="about-title">
+          <div><div class="eyebrow">AN IMPORTANT LITTLE NOTE</div><h2 id="about-title">The beauty is <em>still up to the sky.</em></h2></div>
+          <div><p>Our photo potential scores are creative estimates, not professional forecasts. We look at cloud cover, the chance of rain, wind, and temperature at the real golden-hour window. A little cloud can make a dramatic sky; too much rain can make that perfect shot tricky.</p><details><summary>How does the score work? <span aria-hidden="true">+</span></summary><p>We combine a cloud-cover preference (34 points, favoring partial clouds), dry conditions (38), lighter wind (16), and comfortable temperature (12). Severe forecast weather can reduce the score. We sample the nearest forecast hours around the middle of each golden-hour period. Scores are for inspiration, not safety or photographic certainty.</p></details></div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <a class="brand" href="#top"><span class="brand-symbol" aria-hidden="true"><span></span></span><span>chasing light<span class="brand-period">.</span></span></a>
+        <span>MADE FOR THE MOMENTS YOU ALMOST MISSED.</span>
+        <div>Weather: <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Open-Meteo</a> · Sun: <a href="https://sunrise-sunset.org/" target="_blank" rel="noopener noreferrer">Sunrise-Sunset.org</a></div>
+      </footer>
+    </div>
+  </body>
+</html>

@@ -2,7 +2,7 @@
 
 A responsive, single-page photography planner that combines precise solar timing and real weather forecasts to recommend upcoming golden-hour sessions.
 
-## Run
+## How to run
 
 1. Open the project folder in VS Code.
 2. Start a local web server (recommended: VS Code **Live Server**), or run `python3 -m http.server 8000` from this folder.
